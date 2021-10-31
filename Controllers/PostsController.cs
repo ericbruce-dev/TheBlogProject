@@ -161,9 +161,25 @@ namespace TheBlogProject.Controllers
             return _context.Posts.Any(e => e.Id == id);
         }
 
-        public IActionResult Details()
+        public async Task<IActionResult> Details(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var post = await _context.Posts
+                .Include(p => p.Blog)
+                .Include(p => p.BlogUser)
+                .FirstOrDefaultAsync(m => m.Id == id);
+
+            if (post == null)
+            {
+                return NotFound();
+            }
+
+            return View(post);
         }
+
     }
 }
