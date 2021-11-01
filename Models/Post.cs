@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -40,7 +41,7 @@ namespace TheBlogProject.Models
         public string ContentType { get; set; }
 
         [NotMapped]
-        public IFormatProvider Image { get; set; }
+        public IFormFile Image { get; set; }
 
         //Navigation Property
         public virtual Blog Blog { get; set; }
