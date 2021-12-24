@@ -210,6 +210,7 @@ namespace TheBlogProject.Controllers
             var post = await _context.Posts
                 .Include(p => p.Blog)
                 .Include(p => p.BlogUser)
+                .Include(p => p.Tags)
                 .FirstOrDefaultAsync(m => m.Id == id);
 
             if (post == null)
