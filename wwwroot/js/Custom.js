@@ -38,3 +38,18 @@ function DeleteTag() {
 $("form").on("submit", function () {
     $("#TagList option").prop("selected", "selected");
 });
+
+//Look for tagValues variable to see if it has data
+if (tagValues != '') {
+    let tagArray = tagValues.split(",");
+    for (let i = 0; i < tagArray.length; i++) {
+        //Load up or Replace the options that we have
+        ReplaceTag(tagArray[i], i);
+        index++;
+    }
+}
+
+function ReplaceTag(tag, index) {
+    let newOption = new Option(tag, tag);
+    document.getElementById("TagList").options[index] = newOption;
+}
