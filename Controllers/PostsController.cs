@@ -58,7 +58,7 @@ namespace TheBlogProject.Controllers
                 post.BlogUserId = authorId;
 
                 //Use the _imageService to store the incoming user specified image
-                post.ImageData = await _imageService.EncodeImageAsync(post.Image);
+                post.ImageData = await _imageService.EncodeImageAsync(post.Image); 
                 post.ContentType = _imageService.ContentType(post.Image);
 
                 //Create the slug and determine if it is unique
@@ -247,9 +247,9 @@ namespace TheBlogProject.Controllers
             return _context.Posts.Any(e => e.Id == id);
         }
 
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(string slug)
         {
-            if (id == null)
+            if (string.IsNullOrEmpty(slug))
             {
                 return NotFound();
             }
@@ -258,7 +258,7 @@ namespace TheBlogProject.Controllers
                 .Include(p => p.Blog)
                 .Include(p => p.BlogUser)
                 .Include(p => p.Tags)
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.Slug == slug);
 
             if (post == null)
             {
