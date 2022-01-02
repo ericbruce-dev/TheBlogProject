@@ -1,16 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using TheBlogProject.Data;
 using TheBlogProject.Models;
 using TheBlogProject.Services;
 using TheBlogProject.ViewModels;
-using X.PagedList;
+using Microsoft.EntityFrameworkCore;
+using TheBlogProject.Data;
 
 namespace TheBlogProject.Controllers
 {
@@ -27,24 +26,9 @@ namespace TheBlogProject.Controllers
             _context = context;
         }
 
-        public /*async Task<IActionResult>*/ IActionResult Index(/*int? page*/)
+        public IActionResult Index()
         {
-
             return View();
-
-            //var pageNumber = page ?? 1;
-            //var pageSize = 5;
-
-            ////var blogs = _context.Blogs.Where(
-            ////        b => b.Posts.Any(p => p.ReadyStatus == Enums.ReadyStatus.ProductionReady))
-            ////        .OrderByDescending(b => b.Created)
-            ////        .ToPagedListAsync(pageNumber, pageSize);
-
-            //var blogs = _context.Blogs
-            //        .OrderByDescending(b => b.Created)
-            //        .ToPagedListAsync(pageNumber, pageSize);
-
-            //return View(await blogs);
         }
 
         public IActionResult About()
