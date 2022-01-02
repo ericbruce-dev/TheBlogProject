@@ -8,8 +8,11 @@ using System.Threading.Tasks;
 using TheBlogProject.Models;
 using TheBlogProject.Services;
 using TheBlogProject.ViewModels;
+<<<<<<< HEAD
 using Microsoft.EntityFrameworkCore;
 using TheBlogProject.Data;
+=======
+>>>>>>> parent of 40114e2 (Paged List)
 
 namespace TheBlogProject.Controllers
 {
@@ -17,13 +20,11 @@ namespace TheBlogProject.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IBlogEmailSender _emailSender;
-        private readonly ApplicationDbContext _context;
 
-        public HomeController(ILogger<HomeController> logger, IBlogEmailSender emailSender, ApplicationDbContext context)
+        public HomeController(ILogger<HomeController> logger, IBlogEmailSender emailSender)
         {
             _logger = logger;
             _emailSender = emailSender;
-            _context = context;
         }
 
         public IActionResult Index()
