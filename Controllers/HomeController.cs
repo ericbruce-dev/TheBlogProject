@@ -26,9 +26,13 @@ namespace TheBlogProject.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var blogs = await _context.Blogs
+                .Include(b => b.BlogUser)
+                .ToListAsync();
+
+            return View(blogs);
         }
 
         public IActionResult About()

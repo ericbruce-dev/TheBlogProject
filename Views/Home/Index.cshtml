@@ -5,43 +5,32 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="container px-4 px-lg-5">
-    <div class="row gx-4 gx-lg-5 justify-content-center">
-        <div class="col-md-10 col-lg-8 col-xl-7">
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
             @foreach(var blog in Model)
             {
                 <div class="post-preview">
-                    <a asp-controller="Posts" asp-action="BlogPostsIndex" asp-route-id="@blog.Id"></a>
-                        <p class="post-meta">
-                            Posted by <a href="#!">@blog.BlogUser.FullName</a> on @blog.Created.ToString("MMM dd, yyy")
-                        </p>
-                </div>
+                    <a asp-controller="Posts" asp-action="Details" asp-route-id="@blog.Id">
+                        <h2 class="post-title">
+                            @blog.Name
+                        </h2>
+                        <h3 class="post-subtitle">
+                            @blog.Description
+                        </h3>
+                    </a>
+                    <p class="post-meta">
+                        Posted by @blog.BlogUser.FullName on @blog.Created.ToString("MMM dd, yyyy")
+                    </p>
+                </div>    
+                <hr />
             }
 
-            <hr />
-
-          <div class="d-flex justify-content-end mb-4">
-              <a class="btn btn-primary text-uppercase" href="#!">Older Posts →</a>
-          </div>
+            
+            <div class="clearfix">
+                <a href="#" class="btn btn-primary float-right">Older Posts &rarr;</a>
+            </div>
         </div>
     </div>
 </div>
-                                @*Add paging controls here*@
-
-@*<div class="row">
-    <div class="col h3">
-        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
-    </div>
-</div>
-
-<div class="row">
-    <div class="col">
-        @Html.PagedListPager(Model, page => Url.Action("Index", new {page = page}),
-        new PagedListRenderOptionsB
-        {
-            LiElementClasses = new string[] {"page-item"},
-            PageClasses = new string[] {"page-link"}
-        });
-
-    </div>
-</div>*@

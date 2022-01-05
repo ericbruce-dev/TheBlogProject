@@ -35,6 +35,18 @@ namespace TheBlogProject.Controllers
             return View(await applicationDbContext.ToListAsync());
         }
 
+        public IActionResult BlogPostIndex(int? id)
+        {
+            if (id is null)
+            {
+                return NotFound();
+            }
+
+            var posts = _context.Posts.Where(p => p.BlogId == id).ToList();
+
+            return View("Index", posts);
+        }
+
         // GET: Posts/Create
         public IActionResult Create()
         {
