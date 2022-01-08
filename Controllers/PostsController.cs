@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using TheBlogProject.Data;
 using TheBlogProject.Models;
 using TheBlogProject.Services;
+using X.PagedList;
 
 namespace TheBlogProject.Controllers
 {
@@ -35,16 +36,24 @@ namespace TheBlogProject.Controllers
             return View(await applicationDbContext.ToListAsync());
         }
 
-        public IActionResult BlogPostIndex(int? id)
+        public async Task<IActionResult> BlogPostIndex(int? id, int? page)
         {
             if (id is null)
             {
                 return NotFound();
             }
 
-            var posts = _context.Posts.Where(p => p.BlogId == id).ToList();
+            var pageNumber = page ?? 1;
+            var pageSize = 5;
 
-            return View("Index", posts);
+            //var posts = _context.Posts.Where(p => p.BlogId == id).ToList();
+            var posts = await _context.Posts
+                .Where(p => p.BlogId == id && p.ReadyStatus == Enums.ReadyStatus.ProductionReady)
+                .OrderByDescending(p => p.Created)
+                .ToPagedListAsync(pageNumber, pageSize);
+                
+
+            return View(posts);
         }
 
         // GET: Posts/Create
@@ -259,18 +268,19 @@ namespace TheBlogProject.Controllers
             return _context.Posts.Any(e => e.Id == id);
         }
 
-        public async Task<IActionResult> Details(string slug)
+        //public async Task<IActionResult> Details(string slug)
+        public async Task<IActionResult> Details(int? id)
         {
-            if (string.IsNullOrEmpty(slug))
-            {
-                return NotFound();
-            }
+            //if (string.IsNullOrEmpty(id))
+            //{
+            //    return NotFound();
+            //}
 
             var post = await _context.Posts
                 .Include(p => p.Blog)
                 .Include(p => p.BlogUser)
                 .Include(p => p.Tags)
-                .FirstOrDefaultAsync(m => m.Slug == slug);
+                .FirstOrDefaultAsync(m => m.Id == id);
 
             if (post == null)
             {
