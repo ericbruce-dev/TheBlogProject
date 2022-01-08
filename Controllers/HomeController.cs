@@ -10,7 +10,6 @@ using TheBlogProject.Services;
 using TheBlogProject.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using TheBlogProject.Data;
-using X.PagedList;
 
 namespace TheBlogProject.Controllers
 {
@@ -27,28 +26,13 @@ namespace TheBlogProject.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index(int? page)
+        public async Task<IActionResult> Index()
         {
-            //var blogs = await _context.Blogs
-            //    .Include(b => b.BlogUser)
-            //    .ToListAsync();
+            var blogs = await _context.Blogs
+                .Include(b => b.BlogUser)
+                .ToListAsync();
 
-            //return View(blogs);
-
-            var pageNumber = page ?? 1;
-            var pageSize = 5;
-
-            //var blogs = _context.Blogs.Where(
-            //    b => b.Posts.Any(p => p.ReadyStatus == Enums.ReadyStatus.ProductionReady))
-            //    .OrderByDescending(b => b.Created)
-            //    .ToPagedListAsync(pageNumber, pageSize);
-
-            var blogs = _context.Blogs
-               .Include(b => b.BlogUser)
-               .OrderByDescending(b => b.Created)
-               .ToPagedListAsync(pageNumber, pageSize);
-
-            return View(await blogs);
+            return View(blogs);
         }
 
         public IActionResult About()
