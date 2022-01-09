@@ -46,11 +46,11 @@ namespace TheBlogProject.Controllers
             var pageNumber = page ?? 1;
             var pageSize = 5;
 
-            var posts = _context.Posts.Where(p => p.BlogId == id).ToList();
-            //var posts = await _context.Posts
-            //    .Where(p => p.BlogId == id && p.ReadyStatus == Enums.ReadyStatus.ProductionReady)
-            //    .OrderByDescending(p => p.Created)
-            //    .ToPagedListAsync(pageNumber, pageSize);
+            //var posts = _context.Posts.Where(p => p.BlogId == id).ToList();
+            var posts = await _context.Posts
+                .Where(p => p.BlogId == id && p.ReadyStatus == Enums.ReadyStatus.ProductionReady)
+                .OrderByDescending(p => p.Created)
+                .ToPagedListAsync(pageNumber, pageSize);
 
 
             return View(posts);
@@ -268,10 +268,9 @@ namespace TheBlogProject.Controllers
             return _context.Posts.Any(e => e.Id == id);
         }
 
-        //public async Task<IActionResult> Details(string slug)
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(string slug)
         {
-            if (id == null)
+            if (slug == null)
             {
                 return NotFound("id null");
             }
@@ -280,7 +279,7 @@ namespace TheBlogProject.Controllers
                 .Include(p => p.Blog)
                 .Include(p => p.BlogUser)
                 .Include(p => p.Tags)
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.Slug == slug);
 
             if (post == null)
             {
