@@ -12,7 +12,7 @@
             @foreach(var blog in Model)
             {
                 <div class="post-preview">
-                    <a asp-controller="Posts" asp-action="Details" asp-route-id="@blog.Id">
+                    <a asp-controller="Posts" asp-action="BlogPostIndex" asp-route-id="@blog.Id">
                         <h2 class="post-title">
                             @blog.Name
                         </h2>
