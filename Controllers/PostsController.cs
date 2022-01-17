@@ -293,6 +293,7 @@ namespace TheBlogProject.Controllers
                 .Include(p => p.Blog)
                 .Include(p => p.BlogUser)
                 .Include(p => p.Tags)
+                .Include(p => p.Comments)
                 .FirstOrDefaultAsync(m => m.Slug == slug);
 
             if (post == null)

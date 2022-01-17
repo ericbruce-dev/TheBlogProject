@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -13,18 +14,15 @@ namespace TheBlogProject.Controllers
     public class CommentsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<BlogUser> _userManager;
 
-        public CommentsController(ApplicationDbContext context)
+        public CommentsController(ApplicationDbContext context, UserManager<BlogUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Comments
-        public async Task<IActionResult> OriginalIndex()
-        {
-            var originalComments = await _context.Comments.ToListAsync();
-            return View("Index", originalComments);
-        }
 
         public async Task<IActionResult> ModeratedIndex()
         {
@@ -38,18 +36,18 @@ namespace TheBlogProject.Controllers
         //    return View("Index", deletedComments);
         //}
 
-        //public async Task<IActionResult> Index()
-        //{
-        //    var applicationDbContext = _context.Comments.Include(c => c.BlogUser).Include(c => c.Moderator).Include(c => c.Post);
-        //    return View(await applicationDbContext.ToListAsync());
-        //}
+        public async Task<IActionResult> Index()
+        {
+            var applicationDbContext = _context.Comments.Include(c => c.BlogUser).Include(c => c.Moderator).Include(c => c.Post);
+            return View(await applicationDbContext.ToListAsync());
+        }
 
         // GET: Comments/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
-                return NotFound();
+                return NotFound("id null");
             }
 
             var comment = await _context.Comments
@@ -59,13 +57,13 @@ namespace TheBlogProject.Controllers
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (comment == null)
             {
-                return NotFound();
+                return NotFound("comment null");
             }
 
             return View(comment);
         }
 
-        // GET: Comments/Create
+        //GET: Comments/Create
         //public IActionResult Create()
         //{
         //    ViewData["BlogUserId"] = new SelectList(_context.Users, "Id", "Id");
@@ -79,10 +77,13 @@ namespace TheBlogProject.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,PostId,BlogUserId,ModeratorId,Body,Created,Updated,Moderated,Deleted,ModeratedBody,ModerationType")] Comment comment)
+        public async Task<IActionResult> Create([Bind("PostId,Body")] Comment comment)
         {
             if (ModelState.IsValid)
             {
+                comment.BlogUserId = _userManager.GetUserId(User);
+                comment.Created = DateTime.Now;
+
                 _context.Add(comment);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -96,13 +97,13 @@ namespace TheBlogProject.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return NotFound("id null");
             }
 
             var comment = await _context.Comments.FindAsync(id);
             if (comment == null)
             {
-                return NotFound();
+                return NotFound("comment null");
             }
             ViewData["BlogUserId"] = new SelectList(_context.Users, "Id", "Id", comment.BlogUserId);
             ViewData["ModeratorId"] = new SelectList(_context.Users, "Id", "Id", comment.ModeratorId);
