@@ -88,7 +88,7 @@ namespace TheBlogProject.Services
             //Step 2 repeat: Use the UserManager to create a new user that is defined by the adminUser variable
             await _userManager.CreateAsync(modUser, "Aa;sldfjkbc123!");
 
-            //Step 3 repeat: Add this new user to the Administrator role
+            //Step 3 repeat: Add this new user to the Moderator role
             await _userManager.AddToRoleAsync(modUser, BlogRole.Moderator.ToString());
         }
 

@@ -145,7 +145,7 @@ namespace TheBlogProject.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction("Details", "Posts", new {slug = newComment.Post.Slug }, "commentSection");
+                return RedirectToAction("Details", "Posts", new { slug = newComment.Post.Slug }, "commentSection");
             }
             
             return View(comment);
@@ -157,7 +157,7 @@ namespace TheBlogProject.Controllers
             if (id == null)
             {
                 return NotFound();
-            }
+            } 
 
             var comment = await _context.Comments
                 .Include(c => c.BlogUser)
@@ -181,6 +181,44 @@ namespace TheBlogProject.Controllers
             _context.Comments.Remove(comment);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> Moderate(int id, [Bind("Id,Body,ModeratedBOdy,ModerationType")] Comment comment)
+        {
+            if (id != comment.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                var newComment = await _context.Comments.Include(c => c.Post).FirstOrDefaultAsync(c => c.Id == comment.Id);
+                try
+                {
+                    newComment.ModeratedBody = comment.ModeratedBody;
+                    newComment.ModerationType = comment.ModerationType;
+
+                    newComment.Moderated = DateTime.Now;
+                    newComment.ModeratorId = _userManager.GetUserId(User);
+
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!CommentExists(comment.Id))
+                    {
+                        return NotFound();
+                    }
+
+                    else
+                    {
+                        throw;
+                    }
+                }
+
+                return RedirectToAction("Details", "Posts", new { slug = newComment.Post.Slug }, "commentSection");
+            }
+            return View(comment);
         }
 
         private bool CommentExists(int id)
