@@ -175,12 +175,12 @@ namespace TheBlogProject.Controllers
         // POST: Comments/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int id, string slug)
         {
             var comment = await _context.Comments.FindAsync(id);
             _context.Comments.Remove(comment);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Details", "Posts", new { slug }, "commentSection");
         }
 
         public async Task<IActionResult> Moderate(int id, [Bind("Id,Body,ModeratedBOdy,ModerationType")] Comment comment)
