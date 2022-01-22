@@ -38,7 +38,7 @@
         @foreach (var item in Model) {
             <tr>
                 <td>
-                    <img src="@imageService.DecodeImage(item.ImageData, item.ContentType)" alt="Alternate Text" />
+                    <img class="img-thumbnail w-25 h-25" src="@imageService.DecodeImage(item.ImageData, item.ContentType)" alt="Alternate Text" />
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Title)

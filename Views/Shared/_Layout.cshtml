@@ -63,9 +63,9 @@
                         <span class="subheading">@ViewData["SubTitle"]</span>
                         <form asp-action="SearchIndex" asp-controller="Posts">
                             <div class="input-group mt-5">
-                                <input type="text" name="SearchTerm" placeholder="Search Term" class="form-control" />
+                                <input type="text" name="SearchTerm" placeholder="Search Term" class="form-control rounded-3" />
                                 <div class="input-group-append">
-                                    <button class="btn btn-warning btn-sm" type="button">
+                                    <button class="btn btn-warning btn-sm col-12 p-4 ms-2" type="button">
                                         Search
                                     </button>
                                 </div>
@@ -77,7 +77,9 @@
         </div>
     </header>
     <!-- Main Content-->
-    @RenderBody()
+    <div class="p-5">
+        @RenderBody()
+    </div>
     <!-- Footer-->
     <footer class="border-top">
         <div class="container px-4 px-lg-5">
@@ -109,7 +111,7 @@
                             </a>
                         </li>
                     </ul>
-                    <div class="small text-center text-muted fst-italic">Copyright &copy; Your Website 2021</div>
+                    <div class="small text-center text-muted fst-italic">Copyright &copy; Eric Bruce</div>
                 </div>
             </div>
         </div>

@@ -26,14 +26,13 @@
             <th>
                 @Html.DisplayNameFor(model => model.Abstract)
             </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
             <td>
-                <img src="@imageService.DecodeImage(item.ImageData, item.ContentType)" alt="Alternate Text" />
+                <img class="img-fluid col-md-2" src="@imageService.DecodeImage(item.ImageData, item.ContentType)" alt="Alternate Text" />
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Title)
@@ -48,7 +47,7 @@
                 @Html.DisplayFor(modelItem => item.ReadyStatus)
             </td>
             <td>
-            <td>
+            <td class="col-5">
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-slug="@item.Slug">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
