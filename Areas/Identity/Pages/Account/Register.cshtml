@@ -13,55 +13,53 @@
             <hr />
             <div asp-validation-summary="All" class="text-danger"></div>
 
-            <div class="form-group">
-                <label asp-for="Input.FirstName"></label>
-                <input asp-for="Input.FirstName" class="form-control" />
+            <div class="form-group pb-2">
+                <label asp-for="Input.FirstName"></label> <br />
+                <input class="rounded-3" asp-for="Input.FirstName" class="form-control" />
                 <span asp-validation-for="Input.FirstName" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Input.LastName"></label>
-                <input asp-for="Input.LastName" class="form-control" />
+            <div class="form-group pb-2">
+                <label asp-for="Input.LastName"></label><br />
+                <input class="rounded-3" asp-for="Input.LastName" class="form-control" />
                 <span asp-validation-for="Input.LastName" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Input.DisplayName"></label>
-                <input asp-for="Input.DisplayName" class="form-control" />
+            <div class="form-group pb-2">
+                <label asp-for="Input.DisplayName"></label><br />
+                <input class="rounded-3" asp-for="Input.DisplayName" class="form-control" />
                 <span asp-validation-for="Input.DisplayName" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Input.Email"></label>
-                <input asp-for="Input.Email" class="form-control" />
+            <div class="form-group pb-2">
+                <label asp-for="Input.Email"></label><br />
+                <input class="rounded-3" asp-for="Input.Email" class="form-control" />
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Input.ImageFile"></label>
-                <input type="file" asp-for="Input.ImageFile" class="form-control" accept=".png,.jpg,.bmp,.tif,.svg"/>
+            <div class="form-group pb-2">
+                <label asp-for="Input.ImageFile"></label><br />
+                <input class="rounded-3" type="file" asp-for="Input.ImageFile" class="form-control" accept=".png,.jpg,.bmp,.tif,.svg"/>
                 <span asp-validation-for="Input.ImageFile" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Input.Password"></label>
-                <input asp-for="Input.Password" class="form-control" />
+            <div class="form-group pb-2">
+                <label asp-for="Input.Password"></label><br />
+                <input class="rounded-3" asp-for="Input.Password" class="form-control" />
                 <span asp-validation-for="Input.Password" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Input.ConfirmPassword"></label>
-                <input asp-for="Input.ConfirmPassword" class="form-control" />
+                <label asp-for="Input.ConfirmPassword"></label><br />
+                <input class="rounded-3" asp-for="Input.ConfirmPassword" class="form-control" />
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
-            <button type="submit" class="btn btn-primary mt-3">Register</button>
+            <button type="submit" class="btn btn-primary mt-3 rounded-3">Register</button>
         </form>
     </div>
     <div class="col-md-6 col-md-offset-2">
         <section>
-            <h4>Use another service to register.</h4>
-            <hr />
+            <h4></h4>
             @{
                 if ((Model.ExternalLogins?.Count ?? 0) == 0)
                 {
                     <div>
                         <p>
-                            There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
-                            for details on setting up this ASP.NET application to support logging in via external services.
+                            
                         </p>
                     </div>
                 }

@@ -16,7 +16,7 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
+<table class="table text-light">
     <thead>
         <tr>
             <th>
@@ -33,7 +33,7 @@
     </thead>
     <tbody>
         @foreach (var item in Model) {
-            <tr>
+            <tr class="text-light">
                 <td>
                     <img class="img-thumbnail w-25 h-25" src="@imageService.DecodeImage(item.ImageData, item.ContentType)" alt="Alternate Text" />
                 </td>
@@ -44,16 +44,16 @@
                     @Html.DisplayFor(modelItem => item.Abstract)
                 </td>
                 <td class="col-5">
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-slug="@item.Slug">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a class="text-light" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a class="text-light" asp-action="Details" asp-route-slug="@item.Slug">Details</a> |
+                    <a class="text-light" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
 
-<hr />
+
 
 <div class="row">
     <div class="col h3">

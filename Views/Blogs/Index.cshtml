@@ -51,9 +51,9 @@
                 <img class="img-fluid" width="200" src="@imageService.DecodeImage(blog.ImageData, blog.ContentType)" alt="Image" />
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@blog.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@blog.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@blog.Id">Delete</a>
+                <a class="text-light" asp-action="Edit" asp-route-id="@blog.Id">Edit</a> |
+                <a class="text-light" asp-action="Details" asp-route-id="@blog.Id">Details</a> |
+                <a class="text-light" asp-action="Delete" asp-route-id="@blog.Id">Delete</a>
             </td>
         </tr>
 }
