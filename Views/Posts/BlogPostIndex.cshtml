@@ -7,9 +7,6 @@
 @inject IImageService imageService
 @model  IPagedList<Post>
 
-@*@model IEnumerable<Post>*@
-
-
 @{
     ViewData["Title"] = "Blog Posts";
 }
@@ -46,7 +43,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Abstract)
                 </td>
-                <td>
+                <td class="col-5">
                     <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                     <a asp-action="Details" asp-route-slug="@item.Slug">Details</a> |
                     <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
