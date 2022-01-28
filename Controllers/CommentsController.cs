@@ -54,6 +54,7 @@ namespace TheBlogProject.Controllers
                 .Include(c => c.BlogUser)
                 .Include(c => c.Moderator)
                 .Include(c => c.Post)
+                .Include(c => c.Id)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (comment == null)
             {

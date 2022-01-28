@@ -53,7 +53,7 @@
                 <textarea name="body" class="form-control" rows="10"></textarea>
             </div>
 
-            <button type="submit" class="btn btn-dark btn-sm col-1 pt-3 pb-3 m-3">Submit</button>
+            <button type="submit" class="btn btn-primary btn-sm col-1 pt-3 pb-3 mt-3">Submit</button>
         </form>
     }
 
@@ -73,7 +73,7 @@
 @{ var counter = 0; }
 @foreach(var comment in Model.Comments)
 {
-    <div class="media media-border p-0 mb-2 bg-light">
+    <div class="media media-border p-0 mb-2 bg-dark text-light">
         <img class="mr-3 mt-3 rounded-circle" style="width:60px;" src="@imageService.DecodeImage(comment.BlogUser.ImageData, comment.BlogUser.ContentType)" />
         <div class="media-body">
             <h4>@comment.BlogUser.FullName</h4>
@@ -102,7 +102,7 @@
             @if(comment.Moderated is null && comment.Deleted is null && comment.BlogUserId == userManager.GetUserId(User))
             {
                 <hr />
-                <button data-bs-toggle="modal" data-bs-target="#editModal" class="btn-sm btn-dark float-right font-weight-bold">EDIT</button>
+                <button data-bs-toggle="modal" data-bs-target="#editModal" class="btn-sm btn-light text-dark float-right font-weight-bold">EDIT</button>
             }
 
             @if(User.IsInRole(BlogRole.Moderator.ToString()) && comment.Deleted is null)
@@ -110,13 +110,13 @@
                 <hr />
                 <div class="row">
                     <div class="col-2">
-                        <button class="btn-sm btn-dark font-weight-bold" data-bs-toggle="modal" data-bs-target="@($"#moderateModal{counter}")">MODERATE</button>
+                        <button class="btn-sm btn-primary text-light p-3" data-bs-toggle="modal" data-bs-target="@($"#moderateModal{counter}")">MODERATE</button>
                     </div>
                     <div class="col-2">
                         <form asp-action="Delete" asp-controller="Comments">
                             @Html.Hidden("Id", comment.Id)
                             @Html.Hidden("Slug", comment.Post.Slug)
-                            <button type="submit" class="btn-sm btn-dark font-weight-bold">DELETE</button>
+                            <button type="submit" class="btn-sm btn-danger p-3">DELETE</button>
                         </form>
                     </div>
                 </div>
@@ -127,7 +127,7 @@
 
 
     @*Modals*@
-        <div class="modal" id="@($"moderateModal{counter}")">
+        <div class="modal text-dark" id="@($"moderateModal{counter}")">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -142,6 +142,7 @@
                     
                         <div class="form-group">
                             <label class="control-label">Original Comment</label>
+                            <textarea disabled class="form-control" style="resize:none">@comment.Body</textarea>
                             <textarea disabled class="form-control" style="resize:none">@comment.Body</textarea>
                         </div>
 
@@ -158,10 +159,10 @@
                         <div class="form-group">
                             <div class="row">
                                 <div class="col">
-                                    <button class="btn-sm btn-dark border-success font-weight-bold" type="submit">SUBMIT</button>
+                                    <button class="btn-sm btn-dark p-3 mt-3" type="submit">SUBMIT</button>
                                 </div>
                                 <div class="col">
-                                    <button class="btn-sm btn-dark font-weight-bold" type="button" data-dismiss="modal">CLOSE</button>
+                                    <button class="btn-sm btn-dark p-3 mt-3" type="button" data-bs-dismiss="modal">CLOSE</button>
                                 </div>
                             </div>
                         </div>
