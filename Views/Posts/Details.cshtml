@@ -9,7 +9,7 @@
 @inject IImageService imageService
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = @Model.Title;
 }
 
 <article class="mb-4">
@@ -24,7 +24,9 @@
 
 <hr />
 
-<article>
+
+    @*TAGS*@
+@*<article>
     <div class="row">
         <div class="col text-center font-weight-bold h3">
             Custom Post Tags
@@ -38,9 +40,9 @@
             }
         </div>
     </div>
-</article>
+</article>*@
 
-<hr />
+@*<hr />*@
 
 <div>
     @if(User.Identity.IsAuthenticated)
