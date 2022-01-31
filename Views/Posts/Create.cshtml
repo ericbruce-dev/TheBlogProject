@@ -5,9 +5,8 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h1>Create A Post</h1>
 
-<h4>Post</h4>
 <hr />
 <div class="row">
     <div class="col-md-8">
@@ -22,13 +21,14 @@
                 <input asp-for="Title" class="form-control" />
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group mb-1">
                 <label asp-for="Abstract" class="control-label"></label>
                 <textarea asp-for="Abstract" class="form-control"></textarea>
                 <span asp-validation-for="Abstract" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Content" class="control-label"></label>
+            <label asp-for="Content" class="control-label"></label>
+            <div class="form-group bg-white">
+                @*I had to move the label outside the form-group to make the color consistent with Summernote*@
                 <textarea id="summernote-post-create" asp-for="Content" class="form-control"></textarea>
                 <span asp-validation-for="Content" class="text-danger"></span>
             </div>
@@ -53,16 +53,16 @@
                         <div class="row">
                             <div class="row">
                                 <div class="col-6 d-grid gap-2 d-md-flex">
-                                    <button onclick="AddTag()" type="button" class="btn btn-dark btn-lg" name="Add">Add</button>
+                                    <button onclick="AddTag()" type="button" class="btn btn-primary btn-lg" name="Add">Add</button>
                                 </div>
                                 <div class="col">
-                                    <button onclick="DeleteTag()" name="Delete" type="button" class="btn btn-dark btn-lg">Delete</button>
+                                    <button onclick="DeleteTag()" name="Delete" type="button" class="btn btn-danger btn-lg">Delete</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col">
-                        <select class="d-md-block" name="TagValues" id="TagList" multiple>
+                        <select class="mb-3 mt-3" name="TagValues" id="TagList" multiple>
                            
                         </select>
                     </div>
@@ -74,14 +74,14 @@
                 <span asp-validation-for="Image" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-primary rounded-3 mt-3" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a class="text-light" asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {
