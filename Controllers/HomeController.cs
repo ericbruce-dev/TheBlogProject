@@ -35,6 +35,11 @@ namespace TheBlogProject.Controllers
             return View(blogs);
         }
 
+        public IActionResult AdminError()
+        {
+            return View();
+        }
+
         public IActionResult About()
         {
             return View();

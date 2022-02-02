@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
@@ -24,6 +25,12 @@ namespace TheBlogProject.Controllers
 
         // GET: Comments
 
+        public async Task<IActionResult> OriginalIndex()
+        {
+            var originalComments = await _context.Comments.ToListAsync();
+            return View("Index", originalComments);
+        }
+
         public async Task<IActionResult> ModeratedIndex()
         {
             var moderatedComments = await _context.Comments.Where(c => c.Moderated != null).ToListAsync();
@@ -38,8 +45,16 @@ namespace TheBlogProject.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Comments.Include(c => c.BlogUser).Include(c => c.Moderator).Include(c => c.Post);
-            return View(await applicationDbContext.ToListAsync());
+            if (!User.IsInRole("Administrator"))
+            {
+                return RedirectToAction("AdminError", "Home");
+            }
+
+            else
+            {
+                var applicationDbContext = _context.Comments.Include(c => c.BlogUser).Include(c => c.Moderator).Include(c => c.Post);
+                return View(await applicationDbContext.ToListAsync());
+            }
         }
 
         // GET: Comments/Details/5
@@ -54,7 +69,6 @@ namespace TheBlogProject.Controllers
                 .Include(c => c.BlogUser)
                 .Include(c => c.Moderator)
                 .Include(c => c.Post)
-                .Include(c => c.Id)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (comment == null)
             {
@@ -73,8 +87,7 @@ namespace TheBlogProject.Controllers
         //    return View();
         //}
 
-        // POST: Comments/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // POST: Comments/Create-the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -87,10 +100,11 @@ namespace TheBlogProject.Controllers
 
                 _context.Add(comment);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Index", "Home");
+                //return RedirectToAction("Index", "Home");
+                return RedirectToAction(nameof(Index));
             }
 
-            return NotFound();
+            return View(comment);
         }
 
         // GET: Comments/Edit/5

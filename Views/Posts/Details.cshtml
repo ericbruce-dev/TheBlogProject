@@ -98,7 +98,7 @@
                 </i>
             </small>
 
-            <p>@comment.Body</p>
+           <p>@comment.Body</p>
 
             @*Edit Button*@
             @if(comment.Moderated is null && comment.Deleted is null && comment.BlogUserId == userManager.GetUserId(User))
@@ -142,32 +142,31 @@
                             @Html.Hidden("Id", comment.Id)
                             @Html.Hidden("Body", comment.Body)
                     
-                        <div class="form-group">
-                            <label class="control-label">Original Comment</label>
-                            <textarea disabled class="form-control" style="resize:none">@comment.Body</textarea>
-                            <textarea disabled class="form-control" style="resize:none">@comment.Body</textarea>
-                        </div>
+                            <div class="form-group">
+                                <label class="control-label">Original Comment</label>
+                                <textarea disabled class="form-control" style="resize:none">@comment.Body</textarea>
+                            </div>
 
-                        <div class="form-group">
-                            <label class="control-label">Moderated Comment</label>
-                            <textarea required name="ModeratedBody" class="form-control">@comment.ModeratedBody</textarea>
-                        </div>
+                            <div class="form-group">
+                                <label class="control-label">Moderated Comment</label>
+                                <textarea required name="ModeratedBody" class="form-control">@comment.ModeratedBody</textarea>
+                            </div>
 
-                        <div class="form-group">
-                            <label class="control-label">Reason For Moderation</label>
-                            <select class="form-control" asp-for="@comment.ModerationType" name="ModerationType" asp-items="Html.GetEnumSelectList<ModerationType>()"></select>
-                        </div>
+                            <div class="form-group">
+                                <label class="control-label">Reason For Moderation</label>
+                                <select class="form-control" asp-for="@comment.ModerationType" name="ModerationType" asp-items="@Html.GetEnumSelectList<ModerationType>()"></select>
+                            </div>
 
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col">
-                                    <button class="btn-sm btn-dark p-3 mt-3" type="submit">SUBMIT</button>
-                                </div>
-                                <div class="col">
-                                    <button class="btn-sm btn-dark p-3 mt-3" type="button" data-bs-dismiss="modal">CLOSE</button>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col">
+                                        <button class="btn-sm btn-dark p-3 mt-3" type="submit">SUBMIT</button>
+                                    </div>
+                                    <div class="col">
+                                        <button class="btn-sm btn-dark p-3 mt-3" type="button" data-bs-dismiss="modal">CLOSE</button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                         </form>
                     </div>
                 </div>
