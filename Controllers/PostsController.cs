@@ -284,9 +284,9 @@ namespace TheBlogProject.Controllers
 
         public async Task<IActionResult> Details(string slug)
         {
-            if (slug == null)
+            if (string.IsNullOrEmpty(slug))
             {
-                return NotFound("id null");
+                return NotFound();
             }
 
             var post = await _context.Posts
@@ -294,11 +294,12 @@ namespace TheBlogProject.Controllers
                 .Include(p => p.BlogUser)
                 .Include(p => p.Tags)
                 .Include(p => p.Comments)
+                .ThenInclude(c => c.BlogUser)
                 .FirstOrDefaultAsync(m => m.Slug == slug);
 
             if (post == null)
             {
-                return NotFound("post null");
+                return NotFound();
             }
 
             return View(post);

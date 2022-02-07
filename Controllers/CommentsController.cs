@@ -91,20 +91,25 @@ namespace TheBlogProject.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PostId,Body")] Comment comment)
+        public async Task<IActionResult> Create([Bind("PostId,Body,Post")] Comment comment)
+        //public async Task<IActionResult> Create(int id, string slug)
         {
             if (ModelState.IsValid)
             {
+                //var comment = await _context.Comments.FindAsync(id);
+                //var newComment = await _context.Comments.Include(c => c.Post).FirstOrDefaultAsync(c => c.Id == comment.Id);
+
                 comment.BlogUserId = _userManager.GetUserId(User);
                 comment.Created = DateTime.Now;
 
                 _context.Add(comment);
                 await _context.SaveChangesAsync();
-                //return RedirectToAction("Index", "Home");
-                return RedirectToAction(nameof(Index));
+                //return RedirectToAction("Details", "Posts", new { slug = comment.Post.Slug }, "commentSection");
+                return RedirectToAction("Index", "Home");
+
             }
 
-            return View(comment);
+            return View();
         }
 
         // GET: Comments/Edit/5
@@ -172,7 +177,7 @@ namespace TheBlogProject.Controllers
             if (id == null)
             {
                 return NotFound();
-            } 
+            }
 
             var comment = await _context.Comments
                 .Include(c => c.BlogUser)
@@ -193,12 +198,13 @@ namespace TheBlogProject.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id, string slug)
         {
             var comment = await _context.Comments.FindAsync(id);
+            var newComment = await _context.Comments.Include(c => c.Post).FirstOrDefaultAsync(c => c.Id == comment.Id);
             _context.Comments.Remove(comment);
             await _context.SaveChangesAsync();
-            return RedirectToAction("Details", "Posts", new { slug }, "commentSection");
+            return RedirectToAction("Details", "Posts", new { slug = comment.Post.Slug }, "commentSection");
         }
 
-        public async Task<IActionResult> Moderate(int id, [Bind("Id,Body,ModeratedBOdy,ModerationType")] Comment comment)
+        public async Task<IActionResult> Moderate(int id, [Bind("Id,Body,ModeratedBody,ModerationType")] Comment comment)
         {
             if (id != comment.Id)
             {

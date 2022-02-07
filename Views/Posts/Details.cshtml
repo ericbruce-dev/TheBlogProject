@@ -69,7 +69,7 @@
 
 <hr />
 
-<button id="commentSection" class="btn btn-sm btn-dark">@Model.Comments.Count COMMENT(S)</button>
+<button id="@($"#commentSection")" class="btn btn-sm btn-dark">@Model.Comments.Count COMMENT(S)</button>
 
 
 @{ var counter = 0; }
@@ -104,7 +104,7 @@
             @if(comment.Moderated is null && comment.Deleted is null && comment.BlogUserId == userManager.GetUserId(User))
             {
                 <hr />
-                <button data-bs-toggle="modal" data-bs-target="#editModal" class="btn-sm btn-light text-dark float-right font-weight-bold">EDIT</button>
+                <button data-bs-toggle="modal" data-bs-target="@($"#editModal{ counter }")" class="btn-sm btn-light text-dark float-right font-weight-bold">EDIT</button>
             }
 
             @if(User.IsInRole(BlogRole.Moderator.ToString()) && comment.Deleted is null)
