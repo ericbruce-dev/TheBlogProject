@@ -63,16 +63,14 @@
                     <a class="text-light" asp-action="Details" asp-route-slug="@item.Slug">      
                         <img class="img-thumbnail h-100 w-100" src="@imageService.DecodeImage(item.ImageData, item.ContentType)" alt="Alternate Text" />  
                         <div class="card-body">
-                        <h5 class="card-title">@Html.DisplayFor(modelItem => item.Title)</h5>
-                        <p class="card-text">Posted On @Html.DisplayFor(modelItem => item.Created)</p>
+                            <h5 class="card-title">@Html.DisplayFor(modelItem => item.Title)</h5>
+                            <p class="card-text">Posted On @Html.DisplayFor(modelItem => item.Created)</p>
                         </div> 
                     </a>
                 </div> 
         </div>
     }
 </div>
-
-
 
 <div class="row">
     <div class="col h3">
