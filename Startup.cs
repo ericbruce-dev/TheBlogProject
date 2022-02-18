@@ -57,6 +57,8 @@ namespace TheBlogProject
 
             services.AddScoped<BlogSearchService>();
 
+            services.AddScoped<ConnectionService>();
+
             //Register a preconfigured instance of the MailSettings class
             services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
             services.AddScoped<IBlogEmailSender, EmailService>();
