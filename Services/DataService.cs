@@ -85,6 +85,8 @@ namespace TheBlogProject.Services
                 EmailConfirmed = true
             };
 
+
+
             //Step 2 repeat: Use the UserManager to create a new user that is defined by the adminUser variable
             await _userManager.CreateAsync(modUser, "Aa;sldfjkbc123!");
 
