@@ -8,7 +8,7 @@ namespace TheBlogProject.Services
     {
         public static string GetConnectionString(IConfiguration configuration)
         {
-            var connectionString = configuration["ConnectionString"];
+            var connectionString = configuration["DefaultConnection"];
             var databaseUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
             return string.IsNullOrEmpty(databaseUrl) ? connectionString : BuildConnectionString(databaseUrl);
         }
