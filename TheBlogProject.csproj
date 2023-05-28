@@ -4,6 +4,11 @@
     <TargetFramework>net6.0</TargetFramework>
     <UserSecretsId>aspnet-TheBlogProject-F268C8A5-5C66-4A3C-AB67-C6C22B05F582</UserSecretsId>
     <CopyRefAssembliesToPublishDirectory>false</CopyRefAssembliesToPublishDirectory>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <BaseOutputPath>bin</BaseOutputPath>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <InvariantGlobalization>true</InvariantGlobalization>
   </PropertyGroup>
 
   <ItemGroup>
