@@ -85,6 +85,8 @@ builder.Services.AddScoped<IImageService, BasicImageService>();
 builder.Services.AddScoped<ISlugService, BasicSlugService>();
 
 var app = builder.Build();
+var scope = app.Services.CreateScope();
+await MigrationDataHelper.DataHelper.ManageDataAsync(scope.ServiceProvider);
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
