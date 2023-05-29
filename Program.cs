@@ -21,7 +21,7 @@ var connectionString = builder.Configuration.GetSection("pgSettings")["pgConnect
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(
-        ConnectionService.GetConnectionString(builder.Configuration)));
+        ConnectionHelper.GetConnectionString(builder.Configuration)));
 
 builder.Services.AddIdentity<BlogUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
                .AddDefaultUI()
