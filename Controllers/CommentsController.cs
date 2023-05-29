@@ -31,11 +31,11 @@ namespace TheBlogProject.Controllers
             return View("Index", originalComments);
         }
 
-        public async Task<IActionResult> ModeratedIndex()
-        {
-            var moderatedComments = await _context.Comments.Where(c => c.Moderated != null).ToListAsync();
-            return View("Index", moderatedComments);
-        }
+        //public async Task<IActionResult> ModeratedIndex()
+        //{
+        //    //var moderatedComments = await _context.Comments.Where(c => c.Moderated != null).ToListAsync();
+        //    //return View("Index", moderatedComments);
+        //}
 
         //public async Task<IActionResult> DeletedIndex()
         //{

@@ -11,7 +11,7 @@ namespace TheBlogProject.Services
     {
         public string ContentType(IFormFile file)
         {
-            return file?.ContentType;
+            return file.ContentType;
         }
 
         public string DecodeImage(byte[] data, string type)
@@ -22,7 +22,7 @@ namespace TheBlogProject.Services
 
         public async Task<byte[]> EncodeImageAsync(IFormFile file)
         {
-            if (file is null) return null;
+            //if (file is null) return null;
             using var ms = new MemoryStream();
             await file.CopyToAsync(ms);
             return ms.ToArray();

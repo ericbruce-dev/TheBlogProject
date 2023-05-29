@@ -10,10 +10,10 @@ namespace TheBlogProject.ViewModels
         //So we can configure and use an SMTP server
         //from Google, for example
 
-        public string Mail { get; set; }
-        public string DisplayName { get; set; }
-        public string Password { get; set; }
-        public string Host { get; set; }
-        public int Port { get; set; }
+        public string Mail { get; set; } 
+        public string DisplayName { get; set; } 
+        public string Password { get; set; } 
+        public string Host { get; set; } 
+        public int Port { get; set; } 
     }
 }
