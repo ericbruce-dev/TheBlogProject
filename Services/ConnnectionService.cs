@@ -7,7 +7,7 @@ namespace TheBlogProject.Services
             public static string GetConnectionString(IConfiguration configuration)
             {
                 //var connectionString = configuration.GetSection("pgSettings")["pgConnection"];
-                string databaseUrl = "postgresql:///postgres:VgaUSimVSyrRVoENfA1x@containers-us-west-161.railway.app:5745//railway";
+                string databaseUrl = "postgresql://postgres:VgaUSimVSyrRVoENfA1x@containers-us-west-161.railway.app:5745/railway";
                 return BuildConnectionString(databaseUrl);
             }
 
