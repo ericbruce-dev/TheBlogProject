@@ -13,7 +13,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add builder.Services to the container.
 
-var connectionString = builder.Configuration.GetSection("pgSettings")["pgConnection"];
+//var connectionString = builder.Configuration.GetSection("pgSettings")["pgConnection"];
+var connectionString = builder.Configuration.GetConnectionString("Server=localhost;Port=5432;Database=TheBlogProject;User Id=postgres;Password=3agl35;Trusted_Connection=True;MultipleActiveResultSets=True;");
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(connectionString));
