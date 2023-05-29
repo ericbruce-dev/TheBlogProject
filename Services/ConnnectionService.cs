@@ -9,7 +9,8 @@ namespace TheBlogProject.Services
             public static string GetConnectionString(IConfiguration configuration)
             {
                 //var connectionString = configuration.GetConnectionString("DefaultConnection");
-                var connectionString = configuration.GetConnectionString("Server=localhost;Port=5432;Database=TheBlogProject;User Id=postgres;Password=3agl35;Trusted_Connection=True;MultipleActiveResultSets=True;");
+                //var connectionString = configuration.GetConnectionString("Server=localhost;Port=5432;Database=TheBlogProject;User Id=postgres;Password=3agl35;Trusted_Connection=True;MultipleActiveResultSets=True;");
+                var connectionString = configuration.GetConnectionString($"Server={Environment.GetEnvironmentVariable("PGHOST")}; Port={Environment.GetEnvironmentVariable("PGPORT")};Database={Environment.GetEnvironmentVariable("PGDATABASE")};User Id={Environment.GetEnvironmentVariable("PGUSER")};Password={Environment.GetEnvironmentVariable("PGPASSWORD")};Trusted_Connection=True;MultipleActiveResultSets=true;");
                 var databaseUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
                 return string.IsNullOrEmpty(databaseUrl) ? connectionString : BuildConnectionString(databaseUrl);
             }
