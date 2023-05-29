@@ -1,16 +1,14 @@
-﻿using System;
-using Microsoft.Extensions.Configuration;
-using Npgsql;
+﻿using Npgsql;
 
 namespace TheBlogProject.Services
 {
-          public static class ConnectionHelper
+         public static class ConnectionHelper
         {
             public static string GetConnectionString(IConfiguration configuration)
             {
-                var connectionString = configuration.GetConnectionString("DefaultConnection");
-                var databaseUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
-                return string.IsNullOrEmpty(databaseUrl) ? connectionString : BuildConnectionString(databaseUrl);
+                //var connectionString = configuration.GetSection("pgSettings")["pgConnection"];
+                string databaseUrl = "postgresql:///postgres:VgaUSimVSyrRVoENfA1x@containers-us-west-161.railway.app:5745//railway";
+                return BuildConnectionString(databaseUrl);
             }
 
             //build the connection string from the environment. i.e. Heroku
@@ -32,3 +30,4 @@ namespace TheBlogProject.Services
             }
         }
     }
+
