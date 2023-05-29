@@ -1,4 +1,6 @@
-﻿using Npgsql;
+﻿using System;
+using Microsoft.Extensions.Configuration;
+using Npgsql;
 
 namespace TheBlogProject.Services
 {

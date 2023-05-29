@@ -15,9 +15,13 @@ var builder = WebApplication.CreateBuilder(args);
 
 var connectionString = builder.Configuration.GetSection("pgSettings")["pgConnection"];
 
+//builder.Services.AddDbContext<ApplicationDbContext>(options =>
+//    options.UseNpgsql(connectionString));
+//builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseNpgsql(connectionString));
-builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+    options.UseNpgsql(
+        ConnectionService.GetConnectionString(builder.Configuration)));
 
 builder.Services.AddIdentity<BlogUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
                .AddDefaultUI()
