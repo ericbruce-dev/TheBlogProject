@@ -13,24 +13,24 @@ namespace TheBlogProject.Models
         [Required]
         [StringLength(50, ErrorMessage = "The {0} must be at least {2} and no more than {1} characters long", MinimumLength = 2)]
         [Display(Name = "First Name")]
-        public string FirstName { get; set; } = default!;
+        public string FirstName { get; set; } 
 
         [Required]
         [StringLength(50, ErrorMessage = "The {0} must be at least {2} and no more than {1} characters long", MinimumLength = 2)]
-        public string LastName { get; set; } = default!;
+        public string LastName { get; set; } 
 
         [Required]
         [StringLength(50, ErrorMessage = "The {0} must be at least {2} and no more than {1} characters long", MinimumLength = 2)]
-        public string DisplayName { get; set; } = default!;
+        public string DisplayName { get; set; } 
 
-        public byte[] ImageData { get; set; } = default!;
-        public string ContentType { get; set; } = default!;
-
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} and no more than {1} characters long", MinimumLength = 2)]
-        public string FacebookUrl { get; set; } = default!;
+        public byte[] ImageData { get; set; } 
+        public string ContentType { get; set; } 
 
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} and no more than {1} characters long", MinimumLength = 2)]
-        public string TwitterUrl { get; set; } = default!;
+        public string FacebookUrl { get; set; } 
+
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} and no more than {1} characters long", MinimumLength = 2)]
+        public string TwitterUrl { get; set; } 
 
         [NotMapped]
         public string FullName
