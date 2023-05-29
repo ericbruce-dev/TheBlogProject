@@ -13,7 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add builder.Services to the container.
 
-var connectionString = builder.Configuration.GetSection("pgSettings")["pgConnection"];
+//var connectionString = builder.Configuration.GetSection("pgSettings")["pgConnection"];
 
 //builder.Services.AddDbContext<ApplicationDbContext>(options =>
 //    options.UseNpgsql(connectionString));
