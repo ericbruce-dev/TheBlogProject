@@ -8,9 +8,7 @@ namespace TheBlogProject.Services
         {
             public static string GetConnectionString(IConfiguration configuration)
             {
-                //var connectionString = configuration.GetConnectionString("DefaultConnection");
-                //var connectionString = configuration.GetConnectionString("Server=localhost;Port=5432;Database=TheBlogProject;User Id=postgres;Password=3agl35;Trusted_Connection=True;MultipleActiveResultSets=True;");
-                var connectionString = configuration.GetConnectionString("Server=postgresql://postgres:VgaUSimVSyrRVoENfA1x@containers-us-west-161.railway.app:5745/railway;Port=5432;Database=railway;User Id=postgres;Password=VgaUSimVSyrRVoENfA1x;Trusted_Connection=True;MultipleActiveResultSets=True;");
+                var connectionString = configuration.GetConnectionString("DefaultConnection");
                 var databaseUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
                 return string.IsNullOrEmpty(databaseUrl) ? connectionString : BuildConnectionString(databaseUrl);
             }
