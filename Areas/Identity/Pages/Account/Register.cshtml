@@ -15,37 +15,37 @@
 
             <div class="form-group pb-2">
                 <label asp-for="Input.FirstName"></label> <br />
-                <input class="rounded-3" asp-for="Input.FirstName" class="form-control" />
+                <input class="rounded-3 form-control" asp-for="Input.FirstName" />
                 <span asp-validation-for="Input.FirstName" class="text-danger"></span>
             </div>
             <div class="form-group pb-2">
                 <label asp-for="Input.LastName"></label><br />
-                <input class="rounded-3" asp-for="Input.LastName" class="form-control" />
+                <input class="rounded-3 form-control" asp-for="Input.LastName" />
                 <span asp-validation-for="Input.LastName" class="text-danger"></span>
             </div>
             <div class="form-group pb-2">
                 <label asp-for="Input.DisplayName"></label><br />
-                <input class="rounded-3" asp-for="Input.DisplayName" class="form-control" />
+                <input class="rounded-3 form-control" asp-for="Input.DisplayName" />
                 <span asp-validation-for="Input.DisplayName" class="text-danger"></span>
             </div>
             <div class="form-group pb-2">
                 <label asp-for="Input.Email"></label><br />
-                <input class="rounded-3" asp-for="Input.Email" class="form-control" />
+                <input class="rounded-3 form-control" asp-for="Input.Email" />
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
             <div class="form-group pb-2">
                 <label asp-for="Input.ImageFile"></label><br />
-                <input class="rounded-3" type="file" asp-for="Input.ImageFile" class="form-control" accept=".png,.jpg,.bmp,.tif,.svg"/>
+                <input class="rounded-3 form-control" type="file" asp-for="Input.ImageFile" accept=".png,.jpg,.bmp,.tif,.svg" />
                 <span asp-validation-for="Input.ImageFile" class="text-danger"></span>
             </div>
             <div class="form-group pb-2">
                 <label asp-for="Input.Password"></label><br />
-                <input class="rounded-3" asp-for="Input.Password" class="form-control" />
+                <input class="rounded-3 form-control" asp-for="Input.Password" />
                 <span asp-validation-for="Input.Password" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Input.ConfirmPassword"></label><br />
-                <input class="rounded-3" asp-for="Input.ConfirmPassword" class="form-control" />
+                <input class="rounded-3 form-control" asp-for="Input.ConfirmPassword" />
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
             <button type="submit" class="btn btn-primary mt-3 rounded-3">Register</button>

@@ -65,7 +65,7 @@ namespace TheBlogProject.Areas.Identity.Pages.Account
                 throw new InvalidOperationException($"Unable to load two-factor authentication user.");
             }
 
-            var recoveryCode = Input.RecoveryCode.Replace(" ", string.Empty);
+            var recoveryCode = Input!.RecoveryCode.Replace(" ", string.Empty);
 
             var result = await _signInManager.TwoFactorRecoveryCodeSignInAsync(recoveryCode);
 
